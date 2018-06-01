@@ -16,6 +16,7 @@
     - [ ] Data Transfer tool
         - Lora or 3G
         - See Lora Airtime calculator https://docs.google.com/spreadsheets/d/1QvcKsGeTTPpr9icj4XkKXq4r2zTc2j0gsHLrnplzM3I/edit#gid=0
+        - Data rates https://blog.dbrgn.ch/2017/6/23/lorawan-data-rates/
     - https://stackoverflow.com/questions/33027942/opencv-convert-image-to-bytes-and-back
     - Check out Zlib compression http://www.zlib.net/
     - Check out FFMpeg http://ffmpeg.org
