@@ -16,4 +16,4 @@ include_directories( ${OpenCV_INCLUDE_DIR} )
 
 SET( SOURCE_FILES ronin.cpp)
 add_executable( Ronin ${SOURCE_FILES} )
-target_link_libraries( Ronin ${OpenCV_LIBRARIES} )
+# target_link_libraries( Ronin ${OpenCV_LIBRARIES} )

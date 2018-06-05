@@ -15,6 +15,8 @@
 #include <sys/time.h>
 #include <signal.h>
 #include <stdlib.h>
+#include <fstream>
+#include <vector>
 
 #include <sys/ioctl.h>
 
@@ -427,10 +429,27 @@ void txlora(byte *frame, byte datalen) {
     printf("send: %s\n", frame);
 }
 
+std::vector<u_char> processImage(string img){
+    std::ifstream inFile;
+    inFile.open(img, std::ifstream::binary);
+    if( !inFile ){
+        std::cerr << "Unable to open file";
+        exit(1);
+    }
+    std::vector<u_char> image;
+    image.push_back(inFile.get());
+    while(inFile.good()){
+        // std::cout << "Vector size = " << image.size() << std::endl;
+        image.push_back(inFile.get());
+    }
+    inFile.close();
+    return image;
+}
+
 int main (int argc, char *argv[]) {
 
-    if (argc < 2) {
-        printf ("Usage: argv[0] sender|rec [message]\n");
+    if (argc < 3) {
+        printf ("Usage: argv[0] sender|rec [message] [filename]\n");
         exit(1);
     }
 
@@ -460,11 +479,18 @@ int main (int argc, char *argv[]) {
         printf("Send packets at SF%i on %.6lf Mhz.\n", sf,(double)freq/1000000);
         printf("------------------\n");
 
-        if (argc > 2)
-            strncpy((char *)hello, argv[2], sizeof(hello));
+        // if (argc > 2)
+        //     strncpy((char *)hello, argv[2], sizeof(hello));
 
-        while(1) {
-            txlora(hello, strlen((char *)hello));
+        // while(1) {
+        //     txlora(hello, strlen((char *)hello));
+        //     delay(5000);
+        // }
+        string filename = argv[3];
+        std::vector<u_char> image_buffer = processImage(filename);
+        for(int i = 0; i < image_buffer.size(); i += _MAX_NUM_BYTES_){
+            std::vector<u_char> slice(&image_buffer[i],&image_buffer[i+_MAX_NUM_BYTES_]);
+            txlora(slice, slice.size());
             delay(5000);
         }
     } else {
