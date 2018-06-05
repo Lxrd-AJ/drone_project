@@ -18,7 +18,7 @@
 #include <fstream>
 #include <vector>
 #include <iostream>
-
+#include <chrono>
 #include <sys/ioctl.h>
 
 #include <wiringPi.h>
@@ -177,7 +177,7 @@ sf_t sf = SF7;
 // Set center frequency
 uint32_t  freq = 868100000; // in Mhz! (868.1)
 
-const int _MAX_NUM_BYTES_ = 128; //Max num bytes is actually 256, ideally we should try sending 220 bytes 
+const int _MAX_NUM_BYTES_ = 200; //Max num bytes is actually 256
 
 byte hello[32] = "HELLO";
 
@@ -505,13 +505,19 @@ int main (int argc, char *argv[]) {
 	    std::string filename(argv[2]);
 	    std::cout << "Preparing to send " << filename << std::endl;
         std::vector<u_char> image_buffer = processImage(filename);
+	    std::cout << "Byte size = " << _MAX_NUM_BYTES_ << std::endl;
         std::cout << "Sending image of size " << image_buffer.size() << " bytes" << std::endl;
+        auto start = std::chrono::system_clock::now();
         for(int i = 0; i < image_buffer.size(); i += _MAX_NUM_BYTES_){
-            std::vector<u_char> slice(&image_buffer[i],&image_buffer[i+_MAX_NUM_BYTES_]);
-            txlora(slice.data(), static_cast<u_char>(slice.size()) );
-            std::cout << "Counter index = " << i << std::endl;
-            delay(10); //5000
-        }
+                std::vector<u_char> slice(&image_buffer[i],&image_buffer[i+_MAX_NUM_BYTES_]);
+                txlora(slice.data(), static_cast<u_char>(slice.size()) );
+                std::cout << "Counter index = " << i << std::endl;
+                delay(200); //5000
+            }
+        auto end = std::chrono::system_clock::now();
+        std::chrono::duration<double> elapsed_time = end - start;
+        std::cout << "Total length sent " << image_buffer.size() << " bytes; " << std::endl;
+        std::cout << "Total time = " << elapsed_time.count() << " seconds " << std::endl;
     } else {
 
         // radio init
