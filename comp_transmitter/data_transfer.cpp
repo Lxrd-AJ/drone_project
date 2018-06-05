@@ -151,7 +151,7 @@ typedef unsigned char byte;
 
 static const int CHANNEL = 0;
 
-char message[256];
+u_char message[256];
 
 bool sx1272 = true;
 
@@ -328,13 +328,13 @@ boolean receive(char *payload) {
 
         for(int i = 0; i < receivedCount; i++)
         {
-            payload[i] = (char)readReg(REG_FIFO);
+            payload[i] = (u_char)readReg(REG_FIFO);
         }
     }
     return true;
 }
 
-void receivepacket() {
+std::vector<u_char> receivepacket() {
 
     long int SNR;
     int rssicorr;
@@ -367,10 +367,12 @@ void receivepacket() {
             printf("Length: %i", (int)receivedbytes);
             printf("\n");
             printf("Payload: %s\n", message);
-
+            std::vector<u_char> result(&message[0], &message[(int)receivedbytes]);
+            return result;
         } // received a message
 
     } // dio0=1
+    return nullptr;
 }
 
 static void configPower (int8_t pw) {
@@ -447,6 +449,15 @@ std::vector<u_char> processImage(std::string img){
     return image;
 }
 
+void saveChunk(std::vector<u_char> chunk, std::string filename){
+    std::ofstream outStream;
+    outStream.open(filename, std::ofstream::binary | std::ios::app);
+    for(std::vector<u_char>::iterator it = chunk.begin() ; it != chunk.end(); ++it){
+        outStream << *it;
+    }
+    outStream.close();
+}
+
 int main (int argc, char *argv[]) {
 
     if (argc < 3) {
@@ -489,13 +500,15 @@ int main (int argc, char *argv[]) {
         // }
 
        
-	std::string filename(argv[2]);
-	std::cout << "Preparing to send " << filename << std::endl;
+	    std::string filename(argv[2]);
+	    std::cout << "Preparing to send " << filename << std::endl;
         std::vector<u_char> image_buffer = processImage(filename);
+        std::cout << "Sending image of size " << image_buffer.size() << " bytes" << std::endl;
         for(int i = 0; i < image_buffer.size(); i += _MAX_NUM_BYTES_){
             std::vector<u_char> slice(&image_buffer[i],&image_buffer[i+_MAX_NUM_BYTES_]);
             txlora(slice.data(), static_cast<u_char>(slice.size()) );
-            delay(5000);
+            std::cout << "Counter index = " << i << std::endl;
+            delay(1); //5000
         }
     } else {
 
@@ -506,7 +519,10 @@ int main (int argc, char *argv[]) {
         printf("Listening at SF%i on %.6lf Mhz.\n", sf,(double)freq/1000000);
         printf("------------------\n");
         while(1) {
-            receivepacket(); 
+            std::vector<u_char> chunk = receivepacket(); 
+            if( chunk != nullptr){
+                saveChunk(chunk, "rec_test.jpg");
+            }
             delay(1);
         }
 
