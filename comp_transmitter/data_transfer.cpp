@@ -33,6 +33,7 @@
 #define REG_FIFO_ADDR_PTR           0x0D
 #define REG_FIFO_TX_BASE_AD         0x0E
 #define REG_FIFO_RX_BASE_AD         0x0F
+
 #define REG_RX_NB_BYTES             0x13
 #define REG_FIFO_RX_CURRENT_ADDR    0x10
 #define REG_IRQ_FLAGS               0x12
@@ -306,7 +307,7 @@ void SetupLoRa()
 
 }
 
-boolean receive(char *payload) {
+boolean receive(u_char *payload) {
     // clear rxDone
     writeReg(REG_IRQ_FLAGS, 0x40);
 
@@ -372,7 +373,7 @@ std::vector<u_char> receivepacket() {
         } // received a message
 
     } // dio0=1
-    return nullptr;
+    return {};
 }
 
 static void configPower (int8_t pw) {
@@ -520,7 +521,7 @@ int main (int argc, char *argv[]) {
         printf("------------------\n");
         while(1) {
             std::vector<u_char> chunk = receivepacket(); 
-            if( chunk != nullptr){
+            if( !chunk.empty() ){
                 saveChunk(chunk, "rec_test.jpg");
             }
             delay(1);
