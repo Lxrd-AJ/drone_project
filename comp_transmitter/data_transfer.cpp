@@ -512,7 +512,7 @@ int main (int argc, char *argv[]) {
                 std::vector<u_char> slice(&image_buffer[i],&image_buffer[i+_MAX_NUM_BYTES_]);
                 txlora(slice.data(), static_cast<u_char>(slice.size()) );
                 std::cout << "Counter index = " << i << std::endl;
-                delay(200); //5000
+                delay(_MAX_NUM_BYTES_ * 2); //5000
             }
         auto end = std::chrono::system_clock::now();
         std::chrono::duration<double> elapsed_time = end - start;
