@@ -6,13 +6,15 @@ SET(OpenCV_DIR "/usr/local/Cellar/opencv/3.4.1_2/")
 SET(OpenCV_INCLUDE_DIR "/usr/local/Cellar/opencv/3.4.1_2/include/")
 SET(OpenCV_LIBRARIES "/usr/local/Cellar/opencv/3.4.1_2/lib/")
 
-include_directories( ${OpenCV_INCLUDE_DIR} )
+#include_directories( ${OpenCV_INCLUDE_DIR} )
 
 # get_cmake_property(_variableNames VARIABLES)
 # list (SORT _variableNames)
 # foreach (_variableName ${_variableNames})
 #     message(STATUS "${_variableName}=${${_variableName}}")
 # endforeach()
+
+add_definitions(-lwiringPi -Wall)
 
 SET( SOURCE_FILES ronin.cpp)
 add_executable( Ronin ${SOURCE_FILES} )
