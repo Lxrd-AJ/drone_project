@@ -175,7 +175,7 @@ sf_t sf = SF7;
 // Set center frequency
 uint32_t  freq = 868100000; // in Mhz! (868.1)
 
-const int _MAX_NUM_BYTES_ = 64;
+const int _MAX_NUM_BYTES_ = 64; //Max num bytes is actually 256
 
 byte hello[32] = "HELLO";
 
@@ -429,11 +429,11 @@ void txlora(byte *frame, byte datalen) {
     printf("send: %s\n", frame);
 }
 
-std::vector<u_char> processImage(string img){
+std::vector<u_char> processImage(std::string img){
     std::ifstream inFile;
     inFile.open(img, std::ifstream::binary);
     if( !inFile ){
-        std::cerr << "Unable to open file";
+        std::cout << "Unable to open file";
         exit(1);
     }
     std::vector<u_char> image;
@@ -486,11 +486,11 @@ int main (int argc, char *argv[]) {
         //     txlora(hello, strlen((char *)hello));
         //     delay(5000);
         // }
-        string filename = argv[3];
+	    std::string filename = argv[3];
         std::vector<u_char> image_buffer = processImage(filename);
         for(int i = 0; i < image_buffer.size(); i += _MAX_NUM_BYTES_){
             std::vector<u_char> slice(&image_buffer[i],&image_buffer[i+_MAX_NUM_BYTES_]);
-            txlora(slice, slice.size());
+            txlora(&slice, slice.size());
             delay(5000);
         }
     } else {
