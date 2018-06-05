@@ -177,7 +177,7 @@ sf_t sf = SF7;
 // Set center frequency
 uint32_t  freq = 868100000; // in Mhz! (868.1)
 
-const int _MAX_NUM_BYTES_ = 64; //Max num bytes is actually 256
+const int _MAX_NUM_BYTES_ = 128; //Max num bytes is actually 256, ideally we should try sending 220 bytes 
 
 byte hello[32] = "HELLO";
 
@@ -369,6 +369,7 @@ std::vector<u_char> receivepacket() {
             printf("\n");
             printf("Payload: %s\n", message);
             std::vector<u_char> result(&message[0], &message[(int)receivedbytes]);
+            
             return result;
         } // received a message
 
@@ -509,7 +510,7 @@ int main (int argc, char *argv[]) {
             std::vector<u_char> slice(&image_buffer[i],&image_buffer[i+_MAX_NUM_BYTES_]);
             txlora(slice.data(), static_cast<u_char>(slice.size()) );
             std::cout << "Counter index = " << i << std::endl;
-            delay(1); //5000
+            delay(10); //5000
         }
     } else {
 
