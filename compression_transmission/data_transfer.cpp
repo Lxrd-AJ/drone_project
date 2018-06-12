@@ -479,7 +479,7 @@ int main (int argc, char *argv[]) {
     /*
     Find the max data that can be sent and rate
         - 0.3 kbps to 50 kbps seems to be the 
-        - 16 bytes per transfer
+        - 16 bytes per transfer 
     */
     if (!strcmp("sender", argv[1])) {
         opmodeLora();

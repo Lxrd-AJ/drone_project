@@ -13,7 +13,7 @@
     - [x] Image Compression tool
         - https://stackoverflow.com/questions/19153122/image-compression-tools-via-command-line
         - https://www.tecmint.com/optimize-and-compress-jpeg-or-png-batch-images-linux-commandline/
-    - [ ] Data Transfer tool
+    - [x] Data Transfer tool
         - Lora or 3G
         - See Lora Airtime calculator https://docs.google.com/spreadsheets/d/1QvcKsGeTTPpr9icj4XkKXq4r2zTc2j0gsHLrnplzM3I/edit#gid=0
         - Data rates https://blog.dbrgn.ch/2017/6/23/lorawan-data-rates/
@@ -21,11 +21,14 @@
     - Check out Zlib compression http://www.zlib.net/
     - Check out FFMpeg http://ffmpeg.org
     - http://cpham.perso.univ-pau.fr/WSN-MODEL/tool-html/imagesensor.html
-- [ ] Anomaly detecion
-- [ ] (Optional) Electron GUI app version 
-    - [ ] ReactJS tutorial https://reactjs.org/tutorial/tutorial.html
-    - [ ] React Router setup https://reacttraining.com/react-router/web/guides/quick-start
-    - [ ] React Proton Native https://proton-native.js.org/#/?id=proton-native 
+- [ ] `CV Books <-> Implementation` Image comparison (stored target image vs real-time target image)
+    - [x] Gather dataset
+    - [ ] MSE and Structural Similarity https://www.pyimagesearch.com/2014/09/15/python-compare-two-images/
+    - [ ] Structural Similarity deep dive https://www.pyimagesearch.com/2017/06/19/image-difference-with-opencv-and-python/
+    - Fourier transforms
+    - Difference between histograms
+    - Keypoint (SIFT) matching
+    - PCA differences
 
 # Academic Papers
 ## Algorithms
