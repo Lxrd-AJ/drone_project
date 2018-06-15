@@ -21,14 +21,22 @@
     - Check out Zlib compression http://www.zlib.net/
     - Check out FFMpeg http://ffmpeg.org
     - http://cpham.perso.univ-pau.fr/WSN-MODEL/tool-html/imagesensor.html
-- [ ] `CV Books <-> Implementation` Image comparison (stored target image vs real-time target image)
+- [x] `CV Books <-> Implementation` Image comparison (stored target image vs real-time target image)
     - [x] Gather dataset
-    - [ ] MSE and Structural Similarity https://www.pyimagesearch.com/2014/09/15/python-compare-two-images/
-    - [ ] Structural Similarity deep dive https://www.pyimagesearch.com/2017/06/19/image-difference-with-opencv-and-python/
+    - [ x MSE and Structural Similarity https://www.pyimagesearch.com/2014/09/15/python-compare-two-images/
+    - [x] Structural Similarity deep dive https://www.pyimagesearch.com/2017/06/19/image-difference-with-opencv-and-python/
     - Fourier transforms
     - Difference between histograms
     - Keypoint (SIFT) matching
     - PCA differences
+        - try reducing the dimensions and using SSIM on it
+- [ ] Track moving objects
+    - [ ] Simple object tracking
+        - https://www.pyimagesearch.com/2015/09/21/opencv-track-object-movement/
+    - [ ] Optical flow
+        - https://docs.opencv.org/3.3.1/d7/d8b/tutorial_py_lucas_kanade.html
+    - [ ] Dense optical flow
+        - https://docs.opencv.org/3.3.1/d7/d8b/tutorial_py_lucas_kanade.html
 
 # Academic Papers
 ## Algorithms
