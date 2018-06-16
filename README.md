@@ -2,6 +2,11 @@
 * This is a visual SLAM project and not object segmentation 
 * 200m
 
+# Drone Video Requirements
+- Scene with motion 
+- Scene with animals/humans
+- Dense vegetation
+
 # TODO
 - [x] Draw a bounding box around the matched feature
 - [x] Show how the number of matched features decrease with gaussian noise
