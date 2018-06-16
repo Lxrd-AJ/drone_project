@@ -37,7 +37,7 @@
         - try reducing the dimensions and using SSIM on it
 - [ ] Track moving objects
     - [ ] Simple object tracking
-        - https://www.pyimagesearch.com/2015/09/21/opencv-track-object-movement/
+        - https://www.pyimagesearch.com/2015/05/25/basic-motion-detection-and-tracking-with-python-and-opencv/
     - [ ] Optical flow
         - https://docs.opencv.org/3.3.1/d7/d8b/tutorial_py_lucas_kanade.html
     - [ ] Dense optical flow
