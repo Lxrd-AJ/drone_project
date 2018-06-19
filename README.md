@@ -35,8 +35,8 @@
     - Keypoint (SIFT) matching
     - PCA differences
         - try reducing the dimensions and using SSIM on it
-- [ ] Track moving objects
-    - [ ] Simple object tracking
+- [x] Track moving objects
+    - [x] Simple object tracking
         - https://www.pyimagesearch.com/2015/09/21/opencv-track-object-movement/
     - [ ] Optical flow
         - https://docs.opencv.org/3.3.1/d7/d8b/tutorial_py_lucas_kanade.html
