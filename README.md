@@ -1,4 +1,5 @@
 ![overview](southampton_common.gif)
+![Matched](landing_zone_detection/Promo/common_sift_matching.jpg)
 
 # Notes
 * This is a visual SLAM project and not object segmentation 
