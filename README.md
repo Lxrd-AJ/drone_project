@@ -1,3 +1,5 @@
+![overview](southampton_common.gif)
+
 # Notes
 * This is a visual SLAM project and not object segmentation 
 * 200m
